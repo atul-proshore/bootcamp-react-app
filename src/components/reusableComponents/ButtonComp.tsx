@@ -1,6 +1,6 @@
 import { Button } from "../shadcnUI/button";
 
-enum ButtonTypes {
+export enum ButtonTypes {
   submit = "submit",
   reset = "reset",
   button = "button",
