@@ -1,9 +1,8 @@
 import React from "react";
 import {
   InputGroup,
-  InputGroupAddon,
   InputGroupButton,
-  InputGroupInput,
+  InputGroupInput
 } from "../shadcnUI/input-group";
 
 interface IInputProps {
