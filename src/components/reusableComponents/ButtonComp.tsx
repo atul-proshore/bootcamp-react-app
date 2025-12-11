@@ -28,8 +28,10 @@ const ButtonComp = ({
       <Button
         type={type}
         disabled={disabled}
-        className={`${className} cursor-pointer ${
-          btnColor === "green" ? `bg-[#97BE0D]` : `bg-[#006FB7]`
+        className={`${className} transition-colors duration-100 ease-linear cursor-pointer ${
+          btnColor === "green"
+            ? `bg-[#97BE0D] hover:bg-[#86A80E]`
+            : `bg-[#006FB7] hover:bg-[#005C98]`
         } `}
       >
         {name}
