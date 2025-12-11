@@ -12,25 +12,24 @@ const Navbar: FC = () => {
 
   return (
     <>
-      <nav className="w-full bg-white shadow-sm fixed top-0 left-0 z-50">
+      <nav className="w-full bg-white shadow-md fixed top-0 left-0 z-50">
         <div className="mx-auto px-4 h-24 flex items-center justify-between">
 
           {/* Logo */}
           <Link href="/">
-            <div className="w-20 md:w-32 h-auto">
+            <div className="w-20 md:w-32 ">
               <Image
                 src="/de-heus-logo.webp"
                 alt="Logo"
-                width={129}
-                height={117}
+                width={100}
+                height={100}
                 priority
-                className="w-full h-auto"
               />
             </div>
           </Link>
 
           {/* Desktop Menu */}
-          <div className="hidden md:flex text-xl font-bold items-center gap-8">
+          <div className="hidden md:flex text-base font-bold items-center gap-8">
             <Link
               href="/"
               className="text-[#1C1B1B] hover:text-[#97BE0D] transition relative group"
@@ -46,12 +45,12 @@ const Navbar: FC = () => {
               About Us
               <span className="absolute bottom-0 left-0 w-0 h-0.5 bg-[#97BE0D] group-hover:w-full transition-all duration-300"></span>
             </Link>
-
+            <Link href={"/login"}>
             <ButtonComp
               name="Login"
-              btnColor="blue"
-              className="px-8 py-3 text-xl rounded-md"
+              className="bg-[#006FB7] hover:bg-[#005C98] text-white px-5 py-2 rounded-md"
             />
+            </Link>
           </div>
 
           {/* Mobile Menu Button */}
@@ -66,7 +65,7 @@ const Navbar: FC = () => {
 
         {/* Mobile Menu */}
         <div
-          className={`md:hidden bg-white text-xl font-bold border-t overflow-hidden transition-all duration-300 ${
+          className={`md:hidden bg-white font-bold border-t overflow-hidden transition-all duration-300 ${
             open ? "max-h-96 opacity-100 py-4" : "max-h-0 opacity-0"
           }`}
         >
@@ -86,11 +85,13 @@ const Navbar: FC = () => {
             >
               About Us
             </Link>
-
+            <Link href={"/login"}>
             <ButtonComp
               name="Login"
               className="bg-[#006FB7] hover:bg-[#005C98] text-white px-5 py-2 rounded-md"
             />
+            </Link>
+
           </div>
         </div>
       </nav>
