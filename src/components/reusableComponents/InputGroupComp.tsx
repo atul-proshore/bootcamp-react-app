@@ -17,6 +17,7 @@ interface IInputProps {
   className?: string;
   validationMessage?: string;
   wrapperClassName?: string;
+  props?: any;
 }
 
 const InputGroupComp = ({
@@ -30,6 +31,7 @@ const InputGroupComp = ({
   className,
   validationMessage,
   wrapperClassName,
+  props,
 }: IInputProps) => {
   return (
     <div className={`relative ${wrapperClassName}`}>
@@ -45,6 +47,7 @@ const InputGroupComp = ({
               ? "focus:border-[#97BE0D] focus:ring-2 focus:ring-[#97BE0D]/60 focus:outline-none"
               : "focus:border-[#006FB7] focus:ring-2 focus:ring-[#006FB7]/60 focus:outline-none"
           } ${className}`}
+          {...props}
           placeholder={placeholder}
         />
         {endContent && (
