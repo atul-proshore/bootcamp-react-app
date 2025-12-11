@@ -1,6 +1,7 @@
 import ButtonComp from "@/components/reusableComponents/ButtonComp";
 import CardComp from "@/components/reusableComponents/CardComp";
-import InputComp from "@/components/reusableComponents/InputComp";
+import InputGroupComp from "@/components/reusableComponents/InputGroupComp";
+import { EyeIcon, EyeClosed } from "lucide-react";
 
 export default function Home() {
   return (
@@ -10,7 +11,7 @@ export default function Home() {
         <p className="font-semibold ">This is header</p>
         This is card body
       </CardComp>
-      <InputComp
+      {/* <InputComp
         className=""
         // label="label"
         placeholder="placeholder text"
@@ -18,6 +19,21 @@ export default function Home() {
       />
       <InputComp
         className=""
+        placeholder="placeholder text"
+        validationMessage="this is validation text"
+      /> */}
+      <InputGroupComp
+        label="Password"
+        startContent={<EyeIcon />}
+        endContent={<EyeIcon />}
+        type="password"
+        borderColor="blue"
+        placeholder="placeholder text"
+        validationMessage="this is validation text"
+      />
+      <InputGroupComp
+        type="text"
+        borderColor="green"
         placeholder="placeholder text"
         validationMessage="this is validation text"
       />
