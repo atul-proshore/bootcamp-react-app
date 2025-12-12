@@ -29,7 +29,7 @@ export default function RegisterPage() {
     const [showConfirmPassword, setShowConfirmPassword] = useState(false);
 
     const onSubmit = (data: any) => {
-        console.log("REGISTER DATA:", data);
+        console.log("REGISTER DATA :", data);
     };
 
     return (
