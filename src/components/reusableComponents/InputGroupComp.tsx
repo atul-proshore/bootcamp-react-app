@@ -1,6 +1,7 @@
 import React from "react";
 import {
   InputGroup,
+  InputGroupAddon,
   InputGroupButton,
   InputGroupInput,
 } from "../shadcnUI/input-group";
@@ -40,6 +41,7 @@ const InputGroupComp = ({
         )}
         <InputGroupInput
           type={type}
+          {...props}
           className={`${
             borderColor === "green"
               ? "focus:border-[#97BE0D] focus:ring-2 focus:ring-[#97BE0D]/60 focus:outline-none"
