@@ -48,6 +48,7 @@ const InputGroupComp = ({
               ? "focus:border-[#97BE0D] focus:ring-2 focus:ring-[#97BE0D]/60 focus:outline-none"
               : "focus:border-[#006FB7] focus:ring-2 focus:ring-[#006FB7]/60 focus:outline-none"
           } ${className}`}
+          {...props}
           placeholder={placeholder}
         />
         {endContent && (
