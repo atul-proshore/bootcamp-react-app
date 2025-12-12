@@ -2,7 +2,7 @@ import React from "react";
 import {
   InputGroup,
   InputGroupButton,
-  InputGroupInput
+  InputGroupInput,
 } from "../shadcnUI/input-group";
 
 interface IInputProps {
@@ -16,7 +16,6 @@ interface IInputProps {
   className?: string;
   validationMessage?: string;
   wrapperClassName?: string;
-  props?: any;
 }
 
 const InputGroupComp = ({
@@ -30,7 +29,7 @@ const InputGroupComp = ({
   className,
   validationMessage,
   wrapperClassName,
-  props,
+  ...rest
 }: IInputProps) => {
   return (
     <div className={`relative ${wrapperClassName}`}>
@@ -46,7 +45,7 @@ const InputGroupComp = ({
               ? "focus:border-[#97BE0D] focus:ring-2 focus:ring-[#97BE0D]/60 focus:outline-none"
               : "focus:border-[#006FB7] focus:ring-2 focus:ring-[#006FB7]/60 focus:outline-none"
           } ${className}`}
-          {...props}
+          {...rest}
           placeholder={placeholder}
         />
         {endContent && (
@@ -54,7 +53,7 @@ const InputGroupComp = ({
         )}
       </InputGroup>
       {validationMessage && (
-        <p className="absolute text-red-600">{validationMessage}</p>
+        <p className="absolute text-red-600 text-xs">{validationMessage}</p>
       )}
     </div>
   );

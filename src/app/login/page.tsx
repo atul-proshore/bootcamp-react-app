@@ -6,6 +6,8 @@ import { Checkbox } from "@/components/shadcnUI/checkbox";
 import { useForm } from "react-hook-form";
 import { loginSchema } from "../utils/utils";
 import { yupResolver } from "@hookform/resolvers/yup";
+import { useEffect, useState } from "react";
+import { Eye, EyeOff } from "lucide-react";
 
 type ILoginFormData = {
   email: string;
@@ -17,23 +19,36 @@ export default function Login() {
   const {
     register,
     handleSubmit,
+    setValue,
     formState: { errors },
   } = useForm<ILoginFormData>({
     resolver: yupResolver(loginSchema),
   });
+  const [showPassword, setShowPassword] = useState(false);
   const onSubmit = (data: ILoginFormData) => {
     console.log("Remember me ticked?", data.rememberMe);
-    if (data.rememberMe) {
-      localStorage.setItem("rememberedEmail", data.email);
-    } else {
-      localStorage.removeItem("rememberedEmail");
-    }
     console.log(
       "rememberedEmail in localStorage:",
       localStorage.getItem("rememberedEmail")
     );
     console.log(data);
+    // persist or remove remembered email based on checkbox
+    if (data.rememberMe) {
+      if (data.email) localStorage.setItem("rememberedEmail", data.email);
+    } else {
+      localStorage.removeItem("rememberedEmail");
+    }
   };
+  useEffect(() => {
+    const rememberedEmail = localStorage.getItem("rememberedEmail");
+    if (rememberedEmail) {
+      setValue("email", rememberedEmail);
+      setValue("rememberMe", true);
+    } else {
+      setValue("email", "");
+      setValue("rememberMe", false);
+    }
+  }, []);
   return (
     <CardComp className="flex flex-col gap-6 p-6 w-full max-w-sm lg:max-w-md">
       <form onSubmit={handleSubmit(onSubmit)} className="flex flex-col gap-4">
@@ -48,7 +63,13 @@ export default function Login() {
             label="Username"
             placeholder="Enter your Username"
             validationMessage={errors.email?.message}
-            {...register("email")}
+            {...register("email", {
+              required: "Email is required",
+              pattern: {
+                value: /^[^\s@]+@[^\s@]+\.[^\s@]+$/,
+                message: "Enter a valid email address",
+              },
+            })}
             type="string"
             className="w-full"
             wrapperClassName="w-full max-w-sm"
@@ -57,14 +78,22 @@ export default function Login() {
             label="Password"
             placeholder="Enter Password"
             validationMessage={errors.password?.message}
-            type="string"
+            type={showPassword ? "text" : "password"}
+            endContent={
+              showPassword ? (
+                <EyeOff className="w-4 h-4 cursor-pointer" />
+              ) : (
+                <Eye className="w-4 h-4 cursor-pointer" />
+              )
+            }
+            onClick={() => setShowPassword(!showPassword)}
             className="w-full"
             wrapperClassName="w-full max-w-sm"
             {...register("password")}
           />
         </div>
         <div className="flex justify-center items-center gap-2 ">
-          <input type="checkbox" {...register("rememberMe")} />
+          <input id="remember-me" type="checkbox" {...register("rememberMe")} />
           <label htmlFor="remember-me" className=" text-sm text-gray-600">
             Remember me
           </label>
