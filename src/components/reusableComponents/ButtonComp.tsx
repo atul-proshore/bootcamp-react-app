@@ -1,10 +1,11 @@
 import { Button } from "../shadcnUI/button";
 
-export enum ButtonTypes {
-  submit = "submit",
-  reset = "reset",
-  button = "button",
-}
+// enum ButtonTypes {
+//   submit = "submit",
+//   reset = "reset",
+//   button = "button",
+//   // undefined = "undefined"
+// }
 
 export interface IButtonProps {
   name: string;
@@ -13,7 +14,7 @@ export interface IButtonProps {
   disabled?: boolean;
   className?: string;
   btnColor?: string;
-  type?: ButtonTypes;
+  type?: "submit" | "button" | "reset";
 }
 
 const ButtonComp = ({
