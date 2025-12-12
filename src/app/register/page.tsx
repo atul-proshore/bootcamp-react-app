@@ -2,6 +2,7 @@
 
 import { yupResolver } from "@hookform/resolvers/yup";
 import { Eye, EyeOff } from "lucide-react";
+import Image from "next/image";
 import { useState } from "react";
 import { useForm } from "react-hook-form";
 
@@ -9,7 +10,6 @@ import ButtonComp from "@/components/reusableComponents/ButtonComp";
 import CardComp from "@/components/reusableComponents/CardComp";
 import InputGroupComp from "@/components/reusableComponents/InputGroupComp";
 import { registerSchema } from "../utils/utils";
-
 
 enum ButtonTypes {
     submit = "submit",
@@ -33,144 +33,163 @@ export default function RegisterPage() {
     };
 
     return (
-        <div className="flex h-screen">
-        <div className="w-1/2 h-full relative flex items-center justify-center">
-            <img
-            src="/screenshot.png"
-            alt="De Heus"
-            className="absolute w-full h-full object-cover"
-            />
+    <div className="relative min-h-screen w-full">
 
-            <div className="relative z-10 text-white text-center px-10">
-            <h1 className="text-5xl font-bold mb-4">De Heus</h1>
-            <h2 className="text-lg font-medium mb-4">Poultry Farming Excellence</h2>
-            <p className="text-sm leading-relaxed">
-                Leading the industry with innovative nutrition solutions <br />
-                for poultry farmers worldwide.
-            </p>
-            </div>
+        <div className="absolute inset-0 block lg:hidden">
+            <Image
+            src="/screenshot.png"
+            alt="De Heus" fill priority className="object-cover"
+            />
+            <div className="absolute inset-0 bg-black/40" />
         </div>
 
-        <div className="w-1/2 flex justify-center items-center bg-white">
-            <CardComp className="p-6 shadow-lg rounded-lg w-[420px]">
-            <h2 className="text-2xl font-bold">Create Account</h2>
+        <div className="relative z-10 flex min-h-screen flex-col lg:flex-row">
+            <div className="relative hidden lg:flex w-1/2 items-center justify-center">
+            <Image
+                src="/screenshot.png"
+                alt="De Heus"
+                fill
+                priority
+                className="object-cover"
+            />
+            <div className="relative z-10 text-white text-center px-10">
+                <h1 className="text-5xl font-bold mb-4">De Heus</h1>
+                <h2 className="text-lg font-medium mb-4">
+                Poultry Farming Excellence
+                </h2>
+                <p className="text-sm leading-relaxed">
+                Leading the industry with innovative nutrition solutions <br />
+                for poultry farmers worldwide.
+                </p>
+            </div>
+            </div>
 
-            <form
+{/* mobile */}
+            <div className="flex flex-1 items-center justify-center px-4 py-10">
+            <CardComp className="w-full max-w-md p-6 sm:p-8 shadow-xl rounded-xl bg-white/95 backdrop-blur">
+                <div className="text-center mb-6">
+                <h2 className="text-lg sm:text-xl lg:text-2xl font-bold text-[#006FB7]">
+                    Register New Account
+                </h2>
+                <p className="text-xs sm:text-sm text-[#1E1E1E]">
+                    Join our De Heus community!
+                </p>
+                </div>
+
+                <form
                 onSubmit={handleSubmit(onSubmit)}
-                className="flex flex-col gap-4 mt-4"
-            >
-                <div
-                onInputCapture={(e: any) =>
-                    setValue("fullName", e.target.value, { shouldValidate: true })
-                }
+                className="flex flex-col gap-3 sm:gap-4"
                 >
-                <InputGroupComp
+                <div
+                    onInputCapture={(e: any) =>
+                    setValue("fullName", e.target.value, { shouldValidate: true })
+                    }
+                >
+                    <InputGroupComp
                     type="text"
                     label="Full Name"
                     placeholder="Enter your full name"
                     validationMessage={errors.fullName?.message}
-                />
-                <input type="hidden" {...register("fullName")} />
+                    />
+                    <input type="hidden" {...register("fullName")} />
                 </div>
 
                 <div
-                onInputCapture={(e: any) =>
+                    onInputCapture={(e: any) =>
                     setValue("username", e.target.value, { shouldValidate: true })
-                }
+                    }
                 >
-                <InputGroupComp
+                    <InputGroupComp
                     type="text"
                     label="Username"
                     placeholder="Enter username"
                     validationMessage={errors.username?.message}
-                />
-                <input type="hidden" {...register("username")} />
+                    />
+                    <input type="hidden" {...register("username")} />
                 </div>
 
                 <div
-                onInputCapture={(e: any) =>
+                    onInputCapture={(e: any) =>
                     setValue("email", e.target.value, { shouldValidate: true })
-                }
+                    }
                 >
-                <InputGroupComp
+                    <InputGroupComp
                     type="email"
                     label="Email"
                     placeholder="Enter email"
                     validationMessage={errors.email?.message}
-                />
-                <input type="hidden" {...register("email")} />
+                    />
+                    <input type="hidden" {...register("email")} />
                 </div>
 
                 <div
-                onInputCapture={(e: any) =>
+                    onInputCapture={(e: any) =>
                     setValue("password", e.target.value, { shouldValidate: true })
-                }
+                    }
                 >
-                <InputGroupComp
+                    <InputGroupComp
                     type={showPassword ? "text" : "password"}
                     label="Password"
                     placeholder="Enter password"
                     validationMessage={errors.password?.message}
                     endContent={
-                    <div
+                        <span
                         onClick={() => setShowPassword(!showPassword)}
                         className="cursor-pointer"
-                    >
+                        >
                         {showPassword ? <Eye size={18} /> : <EyeOff size={18} />}
-                    </div>
+                        </span>
                     }
-                />
-                <input type="hidden" {...register("password")} />
+                    />
+                    <input type="hidden" {...register("password")} />
                 </div>
 
                 <div
-                onInputCapture={(e: any) =>
+                    onInputCapture={(e: any) =>
                     setValue("confirmPassword", e.target.value, {
-                    shouldValidate: true,
+                        shouldValidate: true,
                     })
-                }
+                    }
                 >
-                <InputGroupComp
+                    <InputGroupComp
                     type={showConfirmPassword ? "text" : "password"}
                     label="Confirm Password"
                     placeholder="Confirm password"
                     validationMessage={errors.confirmPassword?.message}
                     endContent={
-                    <div
+                        <span
                         onClick={() =>
-                        setShowConfirmPassword(!showConfirmPassword)
+                            setShowConfirmPassword(!showConfirmPassword)
                         }
                         className="cursor-pointer"
-                    >
+                        >
                         {showConfirmPassword ? (
-                        <Eye size={18} />
-                        ) : (
-                        <EyeOff size={18} />
-                        )}
-                    </div>
+                            <Eye size={18} />) : ( <EyeOff size={18} />)}
+                        </span>
                     }
-                />
-                <input type="hidden" {...register("confirmPassword")} />
+                    />
+                    <input type="hidden" {...register("confirmPassword")} />
                 </div>
 
                 <ButtonComp
-                name="Register"
-                type={ButtonTypes.submit}
-                btnColor="green"
-                className="w-full mt-4"
+                    name="Register"
+                    type={ButtonTypes.submit}
+                    btnColor="green"
+                    className="w-full mt-4"
                 />
 
-                <div className="text-center mt-4 text-sm">
-                Already have an account?{" "}
-                <a
+                <p className="text-xs sm:text-sm text-center mt-4">
+                    Already have an account?{" "}
+                    <a
                     href="/login"
-                    className="text-[#97BE0D] font-medium hover:underline"
-                >
+                    className="text-[#006FB7] font-medium hover:underline"
+                    >
                     Login
-                </a>
-                </div>
-            </form>
+                    </a>
+                </p>
+                </form>
             </CardComp>
+            </div>
         </div>
         </div>
     );
