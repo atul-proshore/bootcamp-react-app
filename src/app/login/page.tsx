@@ -50,8 +50,8 @@ export default function Login() {
     }
   }, []);
   return (
-    <div className="flex h-screen">
-      <div className="w-1/2 h-full relative flex items-center justify-center">
+    <div className="flex h-screen flex-col  items-center md:flex-row">
+      <div className=" w-full h-1/2 md:w-1/2 md:h-full relative flex items-center justify-center">
         <img
           src="/screenshot.png"
           alt="De Heus"
@@ -60,17 +60,17 @@ export default function Login() {
 
         <div className="relative z-10 text-white text-center px-10">
           <h1 className="text-5xl font-bold mb-4">De Heus</h1>
-          <h2 className="text-lg font-medium mb-4">
+          <h2 className="text-lg font-medium mb-4 hidden md:block">
             Poultry Farming Excellence
           </h2>
-          <p className="text-sm leading-relaxed">
+          <p className="text-sm leading-relaxed hidden md:block">
             Leading the industry with innovative nutrition solutions <br />
             for poultry farmers worldwide.
           </p>
         </div>
       </div>
-      <div className="w-1/2 flex justify-center items-center bg-white">
-        <CardComp className="flex flex-col gap-6 p-6 w-full max-w-sm lg:max-w-md">
+      <div className=" w-[90%] md:w-1/2 flex justify-center items-center bg-white">
+        <CardComp className="flex flex-col gap-6 p-6 w-full max-w-sm lg:max-w-md relative -mt-[25vh] md:mt-0 z-20 bg-white backdrop-blur-sm rounded-lg">
           <form
             onSubmit={handleSubmit(onSubmit)}
             className="flex flex-col gap-4"
@@ -115,24 +115,27 @@ export default function Login() {
                 {...register("password")}
               />
             </div>
-            <div>
-              {" "}
-              <a
-                href="/register"
-                className="text-[#006FB7] text-sm font-medium hover:underline"
-              >
-                Forgot Password?
-              </a>
-            </div>
-            <div className="flex justify-center items-center gap-2 ">
-              <input
-                id="remember-me"
-                type="checkbox"
-                {...register("rememberMe")}
-              />
-              <label htmlFor="remember-me" className=" text-sm text-gray-600">
-                Remember me
-              </label>
+
+            <div className="flex justify-between items-center gap-2 ">
+              <div className="flex justify-center items-center gap-2">
+                <input
+                  id="remember-me"
+                  type="checkbox"
+                  {...register("rememberMe")}
+                />
+                <label htmlFor="remember-me" className=" text-sm text-gray-600">
+                  Remember me
+                </label>
+              </div>
+              <div>
+                {" "}
+                <a
+                  href="/resetPassword"
+                  className="text-[#006FB7] text-sm font-medium hover:underline"
+                >
+                  Forgot Password?
+                </a>
+              </div>
             </div>
 
             <div className="flex justify-center">
