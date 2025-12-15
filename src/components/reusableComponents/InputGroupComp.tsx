@@ -2,14 +2,14 @@ import React from "react";
 import {
   InputGroup,
   InputGroupButton,
-  InputGroupInput
+  InputGroupInput,
 } from "../shadcnUI/input-group";
 
 interface IInputProps {
   placeholder?: string;
   endContent?: React.ReactNode;
   startContent?: React.ReactNode;
-  type: string;
+  type: "email" | "text" | "password";
   onClick?: () => void;
   label?: string;
   borderColor?: "green" | "blue";
@@ -32,7 +32,7 @@ const InputGroupComp = ({
 }: IInputProps) => {
   return (
     <div className={`relative ${wrapperClassName}`}>
-      {label && <label>{label}</label>}
+      {label && <label className="md:text-base text-sm">{label}</label>}
       <InputGroup>
         {startContent && (
           <InputGroupButton onClick={onClick}>{startContent}</InputGroupButton>
@@ -41,8 +41,8 @@ const InputGroupComp = ({
           type={type}
           className={`${
             borderColor === "green"
-              ? "focus:border-[#97BE0D] focus:ring-2 focus:ring-[#97BE0D]/60 focus:outline-none"
-              : "focus:border-[#006FB7] focus:ring-2 focus:ring-[#006FB7]/60 focus:outline-none"
+              ? "focus:border-[#97BE0D] focus:ring-2 focus:ring-[#97BE0D]/60"
+              : "focus:border-[#006FB7] focus:ring-2 focus:ring-[#006FB7]/60"
           } ${className}`}
           placeholder={placeholder}
         />
@@ -51,7 +51,9 @@ const InputGroupComp = ({
         )}
       </InputGroup>
       {validationMessage && (
-        <p className="absolute text-red-600">{validationMessage}</p>
+        <p className="absolute text-red-600 text-sm sm:text-xs">
+          {validationMessage}
+        </p>
       )}
     </div>
   );

@@ -93,7 +93,7 @@ export default function Login() {
                     message: "Enter a valid email address",
                   },
                 })}
-                type="string"
+                type="email"
                 className="w-full"
                 wrapperClassName="w-full max-w-sm"
               />
