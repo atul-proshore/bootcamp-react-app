@@ -29,31 +29,50 @@ const InputGroupComp = ({
   className,
   validationMessage,
   wrapperClassName,
+  ...rest
 }: IInputProps) => {
   return (
-    <div className={`relative ${wrapperClassName}`}>
-      {label && <label className="md:text-base text-sm">{label}</label>}
-      <InputGroup>
+    <div className={`relative ${wrapperClassName} `}>
+      {label && <label className=" text-sm text-gray-700">{label}</label>}
+      <InputGroup
+        className={`mb-1 focus-visible:ring-2
+    focus-visible:ring-offset-0
+    rounded-md
+    ${
+      !validationMessage
+        ? "focus-visible:ring-[#97BE0D]/60 focus-visible:border-[#97BE0D]"
+        : "focus-visible:ring-red-500/60 focus-visible:border-red-500"
+    }`}
+      >
         {startContent && (
           <InputGroupButton onClick={onClick}>{startContent}</InputGroupButton>
         )}
         <InputGroupInput
           type={type}
-          className={`${
-            borderColor === "green"
-              ? "focus:border-[#97BE0D] focus:ring-2 focus:ring-[#97BE0D]/60"
-              : "focus:border-[#006FB7] focus:ring-2 focus:ring-[#006FB7]/60"
-          } ${className}`}
+          className={`z-20
+    focus-visible:ring-2
+    focus-visible:ring-offset-0
+    rounded-md
+    ${
+      !validationMessage
+        ? "focus-visible:ring-[#97BE0D]/60 focus-visible:border-[#97BE0D]"
+        : "focus-visible:ring-red-500/60 focus-visible:border-red-500"
+    }
+    ${className}
+    text-xs md:text-sm
+    `}
+          {...rest}
           placeholder={placeholder}
         />
         {endContent && (
-          <InputGroupButton onClick={onClick}>{endContent}</InputGroupButton>
+          <InputGroupButton className="z-50" onClick={onClick}>
+            {endContent}
+          </InputGroupButton>
         )}
       </InputGroup>
+
       {validationMessage && (
-        <p className="absolute text-red-600 text-sm sm:text-xs">
-          {validationMessage}
-        </p>
+        <p className="absolute text-red-600 text-xs">{validationMessage}</p>
       )}
     </div>
   );
