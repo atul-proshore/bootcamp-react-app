@@ -5,7 +5,7 @@ import { useState } from "react";
 import type { FC } from "react";
 import { Menu, X } from "lucide-react";
 import Image from "next/image";
-import ButtonComp from "./ButtonComp";
+import ButtonComp from "../../components/reusableComponents/ButtonComp";
 
 const Navbar: FC = () => {
   const [open, setOpen] = useState<boolean>(false);

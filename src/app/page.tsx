@@ -1,5 +1,5 @@
 
-import Navbar from "@/components/reusableComponents/Navbar";
+import Navbar from "@/app/Navbar/Navbar";
 
 
 export default function Home() {
