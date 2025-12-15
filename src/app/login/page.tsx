@@ -2,7 +2,6 @@
 import ButtonComp from "@/components/reusableComponents/ButtonComp";
 import CardComp from "@/components/reusableComponents/CardComp";
 import InputGroupComp from "@/components/reusableComponents/InputGroupComp";
-import { Checkbox } from "@/components/shadcnUI/checkbox";
 import { useForm } from "react-hook-form";
 import { loginSchema } from "../utils/utils";
 import { yupResolver } from "@hookform/resolvers/yup";
@@ -83,17 +82,11 @@ export default function Login() {
             </div>
             <div className="flex flex-col gap-4 justify-center items-center">
               <InputGroupComp
-                label="Username"
-                placeholder="Enter your Username"
+                label="Email"
+                placeholder="Enter your email"
                 validationMessage={errors.email?.message}
-                {...register("email", {
-                  required: "Email is required",
-                  pattern: {
-                    value: /^[^\s@]+@[^\s@]+\.[^\s@]+$/,
-                    message: "Enter a valid email address",
-                  },
-                })}
-                type="string"
+                {...register("email")}
+                type="email"
                 className="w-full"
                 wrapperClassName="w-full max-w-sm"
               />
@@ -130,7 +123,7 @@ export default function Login() {
               <div>
                 {" "}
                 <a
-                  href="/resetPassword"
+                  href="/forgotPassword"
                   className="text-[#006FB7] text-sm font-medium hover:underline"
                 >
                   Forgot Password?
@@ -138,8 +131,8 @@ export default function Login() {
               </div>
             </div>
 
-            <div className="flex justify-center">
-              <ButtonComp name="Sign In" disabled={false} btnColor="green" />
+            <div className="">
+              <ButtonComp className="w-full" name="Sign In" btnColor="green" />
             </div>
             <div className="text-center mt-4 text-sm">
               Already have an account?{" "}
