@@ -20,37 +20,41 @@ export default function ResetPasswordPage() {
     formState: { errors },
   } = useForm({
     resolver: yupResolver(resetPasswordSchema),
+    mode: "onSubmit",
   });
 
   const onSubmit = (data: any) => {
     console.log("RESET PASSWORD DATA:", data);
   };
   return (
-    <div className="flex h-screen">
+    <div className="min-h-screen flex flex-col md:flex-row">
       {/* Left side - Image */}
-      <div className="w-1/2 h-full relative flex items-center justify-center">
+      <div className="relative w-full md:w-1/2 h-56 md:h-auto flex items-center justify-center">
         <Image
           src="/screenshot.png"
           alt="De Heus"
-          width={100}
-          height={100}
-          className="absolute w-full h-full object-cover"
+          fill
+          priority
+          className="object-cover"
         />
 
-        <div className="relative z-10 text-white text-center px-10">
-          <h1 className="text-5xl font-bold mb-4">De Heus</h1>
-          <h2 className="text-lg font-medium mb-4">
+        <div className="relative z-10 text-white text-center px-6 md:px-10">
+          <h1 className="text-3xl md:text-5xl font-bold mb-2 md:mb-4">
+            De Heus
+          </h1>
+          <h2 className="text-sm md:text-lg font-medium mb-2 md:mb-4">
             Poultry Farming Excellence
           </h2>
-          <p className="text-sm leading-relaxed">
+          <p className="hidden md:block text-sm leading-relaxed">
             Leading the industry with innovative nutrition solutions <br />
             for poultry farmers worldwide.
           </p>
         </div>
       </div>
+
       {/* Right side - Reset Password Form */}
-      <div className="w-1/2 flex justify-center items-center bg-white">
-        <CardComp className="p-6 shadow-lg rounded-lg w-[420px]">
+      <div className="w-full md:w-1/2 flex justify-center items-center bg-white px-4 py-8">
+        <CardComp className="p-6 shadow-lg rounded-lg w-full max-w-md">
           <div className="text-center">
             <h2 className="text-3xl mb-2" style={{ color: "#006FB7" }}>
               Forgot Password?
@@ -63,19 +67,14 @@ export default function ResetPasswordPage() {
             onSubmit={handleSubmit(onSubmit)}
             className="flex flex-col gap-4 mt-4"
           >
-            <div
-              onInputCapture={(e: any) =>
-                setValue("email", e.target.value, { shouldValidate: true })
-              }
-            >
               <InputGroupComp
                 type="text"
                 label="Email"
                 placeholder="your@email.com"
                 validationMessage={errors.email?.message}
+                {...register("email")}
               />
-              <input type="hidden" {...register("email")} />
-            </div>
+            
             <ButtonComp
               name="Reset Password"
               type={ButtonTypes.submit}
