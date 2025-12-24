@@ -1,87 +1,149 @@
 "use client";
+
 import { yupResolver } from "@hookform/resolvers/yup";
-import { useForm } from "react-hook-form";
+import { Eye, EyeOff } from "lucide-react";
 import Image from "next/image";
+import { useState } from "react";
+import { useForm } from "react-hook-form";
 
 import ButtonComp from "@/components/reusableComponents/ButtonComp";
 import CardComp from "@/components/reusableComponents/CardComp";
 import InputGroupComp from "@/components/reusableComponents/InputGroupComp";
-import { resetPasswordSchema } from "../utils/utils";
+import { registerSchema } from "../utils/utils";
 
 enum ButtonTypes {
-    submit = "submit",
+  submit = "submit",
 }
 
-export default function ResetPasswordPage() {
-    const {
-            register,
-            handleSubmit,
-            setValue,
-            formState: { errors },
-        } = useForm({
-            resolver: yupResolver(resetPasswordSchema),
-        });
+export default function ResetPassword() {
+  const {
+    register,
+    handleSubmit,
+    setValue,
+    formState: { errors },
+  } = useForm({
+    resolver: yupResolver(registerSchema),
+  });
 
-    const onSubmit = (data: any) => {
-        console.log("RESET PASSWORD DATA:", data);
-    }
-    return (
-        <div className="flex h-screen">
-            {/* Left side - Image */}
-            <div className="w-1/2 h-full relative flex items-center justify-center">
-                <Image
-                src="/screenshot.png"
-                alt="De Heus"
-                className="absolute w-full h-full object-cover"
-                />
+  const [showPassword, setShowPassword] = useState(false);
+  const [showConfirmPassword, setShowConfirmPassword] = useState(false);
 
-                <div className="relative z-10 text-white text-center px-10">
-                    <h1 className="text-5xl font-bold mb-4">De Heus</h1>
-                    <h2 className="text-lg font-medium mb-4">Poultry Farming Excellence</h2>
-                    <p className="text-sm leading-relaxed">
-                        Leading the industry with innovative nutrition solutions <br />
-                        for poultry farmers worldwide.
-                    </p>
-                </div>
-            </div>
-            {/* Right side - Reset Password Form */}
-            <div className="w-1/2 flex justify-center items-center bg-white">
-                <CardComp className="p-6 shadow-lg rounded-lg w-[420px]">
-                    <div className="text-center">
-                        <h2 className="text-3xl mb-2" style={{ color: '#006FB7' }}>Forgot Password?</h2>
-                        <p className="text-gray-600">No worries, we&apos;ll send you reset instructions</p>
-                    </div>
-                    <form  onSubmit={handleSubmit(onSubmit)} className="flex flex-col gap-4 mt-4">
-                        <div
-                            onInputCapture={(e: any) => setValue("email", e.target.value, { shouldValidate: true })}
-                        >
-                            <InputGroupComp
-                                type="text"
-                                label="Email"
-                                placeholder="your@email.com"
-                                validationMessage={errors.email?.message}
-                            />
-                            <input type="hidden" {...register("email")} />
-                        </div>
-                        <ButtonComp
-                            name="Reset Password"
-                            type={ButtonTypes.submit}
-                            btnColor="green"
-                            className="w-full mt-4"
-                        />
+  const onSubmit = (data: any) => {
+    console.log("New password has been submitted:\n", data);
+  };
 
-                        <div className="text-center mt-4 text-sm">
-                            Back to {" "}
-                            <a
-                                href="/login"
-                                className="text-[#97BE0D] font-medium hover:underline"
-                            >
-                                Login?
-                            </a>
-                        </div>
-                    </form>
-                </CardComp>
-            </div>
+  return (
+    <div className="relative min-h-screen w-full">
+      <div className="absolute inset-0 block lg:hidden">
+        <Image
+          src="/screenshot.png"
+          alt="De Heus"
+          fill
+          priority
+          className="object-cover"
+        />
+        <div className="absolute inset-0 bg-black/40" />
+      </div>
+
+      <div className="relative z-10 flex min-h-screen flex-col lg:flex-row">
+        <div className="relative hidden lg:flex w-1/2 items-center justify-center">
+          <Image
+            src="/screenshot.png"
+            alt="De Heus"
+            fill
+            priority
+            className="object-cover"
+          />
+          <div className="relative z-10 text-white text-center px-10">
+            <h1 className="text-5xl font-bold mb-4">De Heus</h1>
+            <h2 className="text-lg font-medium mb-4">
+              Poultry Farming Excellence
+            </h2>
+            <p className="text-sm leading-relaxed">
+              Leading the industry with innovative nutrition solutions <br />
+              for poultry farmers worldwide.
+            </p>
+          </div>
         </div>
-    );
+
+        {/* mobile */}
+        <div className="flex flex-1 items-center justify-center px-4 py-10">
+          <CardComp className="w-full max-w-md p-6 sm:p-8 shadow-xl rounded-xl bg-white/95 backdrop-blur">
+            <div className="text-center mb-3">
+              <h2
+                aria-label="Set New Password"
+                className="text-lg sm:text-xl lg:text-2xl font-semibold text-[#006FB7]"
+              >
+                Set New Password
+              </h2>
+            </div>
+
+            <form
+              onSubmit={handleSubmit(onSubmit)}
+              className="flex flex-col gap-2 sm:gap-3"
+            >
+              <div
+                onInputCapture={(e: any) =>
+                  setValue("password", e.target.value, { shouldValidate: true })
+                }
+              >
+                <InputGroupComp
+                  type={showPassword ? "text" : "password"}
+                  label="Password"
+                  placeholder="Enter password"
+                  validationMessage={errors.password?.message}
+                  endContent={
+                    <span
+                      onClick={() => setShowPassword(!showPassword)}
+                      className="cursor-pointer"
+                    >
+                      {showPassword ? <Eye size={18} /> : <EyeOff size={18} />}
+                    </span>
+                  }
+                  {...register("password")}
+                />
+              </div>
+
+              <div
+                onInputCapture={(e: any) =>
+                  setValue("confirmPassword", e.target.value, {
+                    shouldValidate: true,
+                  })
+                }
+              >
+                <InputGroupComp
+                  type={showConfirmPassword ? "text" : "password"}
+                  label="Confirm Password"
+                  placeholder="Confirm password"
+                  validationMessage={errors.confirmPassword?.message}
+                  endContent={
+                    <span
+                      onClick={() =>
+                        setShowConfirmPassword(!showConfirmPassword)
+                      }
+                      className="cursor-pointer"
+                    >
+                      {showConfirmPassword ? (
+                        <Eye size={18} />
+                      ) : (
+                        <EyeOff size={18} />
+                      )}
+                    </span>
+                  }
+                  {...register("confirmPassword")}
+                />
+              </div>
+
+              <ButtonComp
+                name="Submit"
+                type={ButtonTypes.submit}
+                btnColor="green"
+                className="w-full mt-4"
+              />
+            </form>
+          </CardComp>
+        </div>
+      </div>
+    </div>
+  );
 }
