@@ -29,7 +29,7 @@ const ButtonComp = ({
       <Button
         type={type}
         disabled={disabled}
-        className={`${className} transition-colors duration-100 ease-linear cursor-pointer ${
+        className={`${className} transition-colors duration-100 ease-linear cursor-pointer  ${
           btnColor === "green"
             ? `bg-[#97BE0D] hover:bg-[#86A80E]`
             : `bg-[#006FB7] hover:bg-[#005C98]`

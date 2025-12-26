@@ -132,7 +132,12 @@ export default function Login() {
             </div>
 
             <div className="">
-              <ButtonComp className="w-full" name="Sign In" btnColor="green" />
+              <ButtonComp
+                className="w-full"
+                name="Sign In"
+                btnColor="green"
+                type="submit"
+              />
             </div>
             <div className="text-center mt-4 text-sm">
               Already have an account?{" "}
