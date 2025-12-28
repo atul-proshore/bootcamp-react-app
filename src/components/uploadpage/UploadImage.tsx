@@ -15,11 +15,7 @@ export default function UploadImage({ onUpload }: UploadImageProps) {
     }
 
     return (
-        <label className="flex cursor-pointer flex-col items-center justify-center
-            gap-2rounded-md
-            border-2 border-dashed border-[#006FB7]
-            bg-[#E2EEFA] px-6 py-10
-            text-center transition hover:bg-[#CAE3FD]">
+        <label className="flex cursor-pointer flex-col items-center justify-center gap-2 rounded-md border-2 border-dashed border-[#006FB7] bg-[#E2EEFA] px-6 py-10 text-center transition hover:bg-[#CAE3FD]">
         <input
             type="file"
             accept="image/png,image/jpeg, image/jpg, image/svg+xml"
