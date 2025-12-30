@@ -1,7 +1,11 @@
+import { Sidebar } from "@/components/ui/sidebar";
 import React from "react";
 
 const Dashboard = () => {
-  return <div>This is Dashboard</div>;
+  return (
+    <>
+      <input type="file"></input>
+    </>
+  );
 };
-
 export default Dashboard;
