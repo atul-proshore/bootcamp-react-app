@@ -2,22 +2,19 @@
 
 import ImageCanvas from "@/components/uploadpage/ImageCanvas";
 import UploadSheet from "@/components/uploadpage/UploadPage";
-import { useState } from "react";
+import { useContext, useState } from "react";
+import { ImageProvider, ImageContext } from "@/context/Context";
 
 export default function Page() {
-  const [image, setImage] = useState<string | null>(null);
+  // const [image, setImage] = useState<string | null>(null);
   const [fileEnter, setFileEnter] = useState(false);
-
+  const { image, setImage } = useContext(ImageContext);
   return (
     <div className="flex justify-center pt-10">
       {!image ? (
-        <UploadSheet
-          onUpload={setImage}
-          fileEnter={fileEnter}
-          setFileEnter={setFileEnter}
-        />
+        <UploadSheet fileEnter={fileEnter} setFileEnter={setFileEnter} />
       ) : (
-        <ImageCanvas image={image} onRetake={() => setImage(null)} />
+        <ImageCanvas onRetake={() => setImage(null)} />
       )}
     </div>
   );

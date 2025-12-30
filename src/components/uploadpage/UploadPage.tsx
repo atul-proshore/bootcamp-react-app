@@ -10,13 +10,11 @@ import CameraButton from "./Capture";
 import UploadImage from "./UploadImage";
 
 interface UploadSheetProps {
-  onUpload: (imageUrl: string) => void;
   fileEnter: boolean;
   setFileEnter: (enter: boolean) => void;
 }
 
 export default function UploadSheet({
-  onUpload,
   fileEnter,
   setFileEnter,
 }: UploadSheetProps) {
@@ -35,11 +33,7 @@ export default function UploadSheet({
       </CardHeader>
 
       <CardContent className="space-y-4">
-        <UploadImage
-          onUpload={onUpload}
-          fileEnter={fileEnter}
-          setFileEnter={setFileEnter}
-        />
+        <UploadImage fileEnter={fileEnter} setFileEnter={setFileEnter} />
 
         <div className="text-center text-xs text-muted-foreground">or</div>
 

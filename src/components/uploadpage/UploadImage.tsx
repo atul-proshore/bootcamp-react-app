@@ -2,19 +2,19 @@
 
 import { on } from "events";
 import { Upload } from "lucide-react";
-import { useState } from "react";
+import { useContext, useState } from "react";
 import { set } from "react-hook-form";
+import { ImageContext } from "@/context/Context";
 interface UploadImageProps {
-  onUpload: (imageUrl: string) => void;
   fileEnter: boolean;
   setFileEnter: (enter: boolean) => void;
 }
 
 export default function UploadImage({
-  onUpload,
   fileEnter,
   setFileEnter,
 }: UploadImageProps) {
+  const { setImage } = useContext(ImageContext);
   const handleDragOver = (e: React.DragEvent<HTMLLabelElement>) => {
     e.preventDefault();
     setFileEnter(true);
@@ -36,7 +36,7 @@ export default function UploadImage({
           const file = item.getAsFile();
           if (file) {
             const url = URL.createObjectURL(file);
-            onUpload(url);
+            setImage(url);
           }
         }
       });
@@ -47,7 +47,7 @@ export default function UploadImage({
     const file = e.target.files?.[0];
     if (!file) return;
     const url = URL.createObjectURL(file);
-    onUpload(url);
+    setImage(url);
   };
 
   return (

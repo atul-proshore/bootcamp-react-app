@@ -15,6 +15,7 @@ export interface IButtonProps {
   className?: string;
   btnColor?: string;
   type?: "submit" | "button" | "reset";
+  onClick?: () => void;
 }
 
 const ButtonComp = ({
@@ -23,12 +24,14 @@ const ButtonComp = ({
   disabled,
   btnColor,
   type,
+  onClick,
 }: IButtonProps) => {
   return (
     <div>
       <Button
         type={type}
         disabled={disabled}
+        onClick={onClick}
         className={`${className} transition-colors duration-100 ease-linear cursor-pointer  ${
           btnColor === "green"
             ? `bg-[#97BE0D] hover:bg-[#86A80E]`
