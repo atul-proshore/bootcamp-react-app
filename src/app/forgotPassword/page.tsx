@@ -21,7 +21,11 @@ export default function ResetPasswordPage() {
     resolver: yupResolver(resetPasswordSchema),
   });
 
-  const onSubmit = (data: any) => {
+  interface ResetPasswordFormData {
+    email: string;
+  }
+
+  const onSubmit = (data: ResetPasswordFormData) => {
     console.log('RESET PASSWORD DATA:', data);
   };
   return (
@@ -63,8 +67,8 @@ export default function ResetPasswordPage() {
             className="mt-4 flex flex-col gap-4"
           >
             <div
-              onInputCapture={(e: any) =>
-                setValue('email', e.target.value, { shouldValidate: true })
+              onInputCapture={(e) =>
+                setValue('email', (e.target as HTMLInputElement).value, { shouldValidate: true })
               }
             >
               <InputGroupComp
