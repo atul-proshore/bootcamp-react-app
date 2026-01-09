@@ -14,7 +14,7 @@ export default function Page() {
       {!image ? (
         <UploadSheet fileEnter={fileEnter} setFileEnter={setFileEnter} />
       ) : (
-        <ImageCanvas onRetake={() => setImage(null)} />
+        <ImageCanvas onRetake={() => setImage("")} />
       )}
     </div>
   );

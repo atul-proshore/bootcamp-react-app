@@ -1,12 +1,13 @@
-"use client";
-import ButtonComp from "@/components/reusableComponents/ButtonComp";
-import CardComp from "@/components/reusableComponents/CardComp";
-import InputGroupComp from "@/components/reusableComponents/InputGroupComp";
-import { useForm } from "react-hook-form";
-import { loginSchema } from "../utils/utils";
-import { yupResolver } from "@hookform/resolvers/yup";
-import { useEffect, useState } from "react";
-import { Eye, EyeOff } from "lucide-react";
+'use client';
+import ButtonComp from '@/components/reusableComponents/ButtonComp';
+import CardComp from '@/components/reusableComponents/CardComp';
+import InputGroupComp from '@/components/reusableComponents/InputGroupComp';
+import { useForm } from 'react-hook-form';
+import { loginSchema } from '../utils/utils';
+import { yupResolver } from '@hookform/resolvers/yup';
+import { useEffect, useState } from 'react';
+import { Eye, EyeOff } from 'lucide-react';
+import Image from 'next/image';
 
 type ILoginFormData = {
   email: string;
@@ -25,67 +26,68 @@ export default function Login() {
   });
   const [showPassword, setShowPassword] = useState(false);
   const onSubmit = (data: ILoginFormData) => {
-    console.log("Remember me ticked?", data.rememberMe);
+    console.log('Remember me ticked?', data.rememberMe);
     console.log(
-      "rememberedEmail in localStorage:",
-      localStorage.getItem("rememberedEmail")
+      'rememberedEmail in localStorage:',
+      localStorage.getItem('rememberedEmail')
     );
     console.log(data);
     // persist or remove remembered email based on checkbox
     if (data.rememberMe) {
-      if (data.email) localStorage.setItem("rememberedEmail", data.email);
+      if (data.email) localStorage.setItem('rememberedEmail', data.email);
     } else {
-      localStorage.removeItem("rememberedEmail");
+      localStorage.removeItem('rememberedEmail');
     }
   };
   useEffect(() => {
-    const rememberedEmail = localStorage.getItem("rememberedEmail");
+    const rememberedEmail = localStorage.getItem('rememberedEmail');
     if (rememberedEmail) {
-      setValue("email", rememberedEmail);
-      setValue("rememberMe", true);
+      setValue('email', rememberedEmail);
+      setValue('rememberMe', true);
     } else {
-      setValue("email", "");
-      setValue("rememberMe", false);
+      setValue('email', '');
+      setValue('rememberMe', false);
     }
   }, []);
   return (
-    <div className="flex h-screen flex-col  items-center md:flex-row">
-      <div className=" w-full h-1/2 md:w-1/2 md:h-full relative flex items-center justify-center">
-        <img
+    <div className="flex h-screen flex-col items-center md:flex-row">
+      <div className="relative flex h-1/2 w-full items-center justify-center md:h-full md:w-1/2">
+        <Image
+          fill
           src="/screenshot.png"
           alt="De Heus"
-          className="absolute w-full h-full object-cover"
+          className="absolute h-full w-full object-cover"
         />
 
-        <div className="relative z-10 text-white text-center px-10">
-          <h1 className="text-5xl font-bold mb-4">De Heus</h1>
-          <h2 className="text-lg font-medium mb-4 hidden md:block">
+        <div className="relative z-10 px-10 text-center text-white">
+          <h1 className="mb-4 text-5xl font-bold">De Heus</h1>
+          <h2 className="mb-4 hidden text-lg font-medium md:block">
             Poultry Farming Excellence
           </h2>
-          <p className="text-sm leading-relaxed hidden md:block">
+          <p className="hidden text-sm leading-relaxed md:block">
             Leading the industry with innovative nutrition solutions <br />
             for poultry farmers worldwide.
           </p>
         </div>
       </div>
-      <div className=" w-[90%] md:w-1/2 flex justify-center items-center bg-white">
-        <CardComp className="flex flex-col gap-6 p-6 w-full max-w-sm lg:max-w-md relative -mt-[25vh] md:mt-0 z-20 bg-white backdrop-blur-sm rounded-lg">
+      <div className="flex w-[90%] items-center justify-center bg-white md:w-1/2">
+        <CardComp className="relative z-20 -mt-[25vh] flex w-full max-w-sm flex-col gap-6 rounded-lg bg-white p-6 backdrop-blur-sm md:mt-0 lg:max-w-md">
           <form
             onSubmit={handleSubmit(onSubmit)}
             className="flex flex-col gap-4"
           >
-            <div className="flex flex-col justify-center items-center">
-              <p className="font-semibold text-2xl text-[#006FB7] ">
+            <div className="flex flex-col items-center justify-center">
+              <p className="text-2xl font-semibold text-[#006FB7]">
                 Welcome Back!
               </p>
               <p className="text-[#1E1E1E]">Sign in to your account</p>
             </div>
-            <div className="flex flex-col gap-4 justify-center items-center">
+            <div className="flex flex-col items-center justify-center gap-4">
               <InputGroupComp
                 label="Email"
                 placeholder="Enter your email"
                 validationMessage={errors.email?.message}
-                {...register("email")}
+                {...register('email')}
                 type="email"
                 className="w-full"
                 wrapperClassName="w-full max-w-sm"
@@ -94,37 +96,37 @@ export default function Login() {
                 label="Password"
                 placeholder="Enter Password"
                 validationMessage={errors.password?.message}
-                type={showPassword ? "text" : "password"}
+                type={showPassword ? 'text' : 'password'}
                 endContent={
                   showPassword ? (
-                    <EyeOff className="w-4 h-4 cursor-pointer" />
+                    <EyeOff className="h-4 w-4 cursor-pointer" />
                   ) : (
-                    <Eye className="w-4 h-4 cursor-pointer" />
+                    <Eye className="h-4 w-4 cursor-pointer" />
                   )
                 }
                 onClick={() => setShowPassword(!showPassword)}
                 className="w-full"
                 wrapperClassName="w-full max-w-sm"
-                {...register("password")}
+                {...register('password')}
               />
             </div>
 
-            <div className="flex justify-between items-center gap-2 ">
-              <div className="flex justify-center items-center gap-2">
+            <div className="flex items-center justify-between gap-2">
+              <div className="flex items-center justify-center gap-2">
                 <input
                   id="remember-me"
                   type="checkbox"
-                  {...register("rememberMe")}
+                  {...register('rememberMe')}
                 />
-                <label htmlFor="remember-me" className=" text-sm text-gray-600">
+                <label htmlFor="remember-me" className="text-sm text-gray-600">
                   Remember me
                 </label>
               </div>
               <div>
-                {" "}
+                {' '}
                 <a
                   href="/forgotPassword"
-                  className="text-[#006FB7] text-sm font-medium hover:underline"
+                  className="text-sm font-medium text-[#006FB7] hover:underline"
                 >
                   Forgot Password?
                 </a>
@@ -139,11 +141,11 @@ export default function Login() {
                 type="submit"
               />
             </div>
-            <div className="text-center mt-4 text-sm">
-              Already have an account?{" "}
+            <div className="mt-4 text-center text-sm">
+              Already have an account?{' '}
               <a
                 href="/register"
-                className="text-[#006FB7] font-medium hover:underline"
+                className="font-medium text-[#006FB7] hover:underline"
               >
                 Sign Up
               </a>

@@ -1,15 +1,14 @@
-"use client";
-import { yupResolver } from "@hookform/resolvers/yup";
-import { useForm } from "react-hook-form";
-import Image from "next/image";
-
-import ButtonComp from "@/components/reusableComponents/ButtonComp";
-import CardComp from "@/components/reusableComponents/CardComp";
-import InputGroupComp from "@/components/reusableComponents/InputGroupComp";
-import { resetPasswordSchema } from "../utils/utils";
+'use client';
+import { yupResolver } from '@hookform/resolvers/yup';
+import { useForm } from 'react-hook-form';
+import Image from 'next/image';
+import ButtonComp from '@/components/reusableComponents/ButtonComp';
+import CardComp from '@/components/reusableComponents/CardComp';
+import InputGroupComp from '@/components/reusableComponents/InputGroupComp';
+import { resetPasswordSchema } from '../utils/utils';
 
 enum ButtonTypes {
-  submit = "submit",
+  submit = 'submit',
 }
 
 export default function ResetPasswordPage() {
@@ -23,26 +22,28 @@ export default function ResetPasswordPage() {
     mode: "onSubmit",
   });
 
-  const onSubmit = (data: any) => {
-    console.log("RESET PASSWORD DATA:", data);
+  interface ResetPasswordFormData {
+    email: string;
+  }
+
+  const onSubmit = (data: ResetPasswordFormData) => {
+    console.log('RESET PASSWORD DATA:', data);
   };
   return (
     <div className="min-h-screen flex flex-col md:flex-row">
       {/* Left side - Image */}
-      <div className="relative w-full md:w-1/2 h-56 md:h-auto flex items-center justify-center">
+      <div className="relative flex h-full w-1/2 items-center justify-center">
         <Image
           src="/screenshot.png"
           alt="De Heus"
-          fill
-          priority
-          className="object-cover"
+          width={100}
+          height={100}
+          className="absolute h-full w-full object-cover"
         />
 
-        <div className="relative z-10 text-white text-center px-6 md:px-10">
-          <h1 className="text-3xl md:text-5xl font-bold mb-2 md:mb-4">
-            De Heus
-          </h1>
-          <h2 className="text-sm md:text-lg font-medium mb-2 md:mb-4">
+        <div className="relative z-10 px-10 text-center text-white">
+          <h1 className="mb-4 text-5xl font-bold">De Heus</h1>
+          <h2 className="mb-4 text-lg font-medium">
             Poultry Farming Excellence
           </h2>
           <p className="hidden md:block text-sm leading-relaxed">
@@ -53,10 +54,10 @@ export default function ResetPasswordPage() {
       </div>
 
       {/* Right side - Reset Password Form */}
-      <div className="w-full md:w-1/2 flex justify-center items-center bg-white px-4 py-8">
-        <CardComp className="p-6 shadow-lg rounded-lg w-full max-w-md">
+      <div className="flex w-1/2 items-center justify-center bg-white">
+        <CardComp className="w-[420px] rounded-lg p-6 shadow-lg">
           <div className="text-center">
-            <h2 className="text-3xl mb-2" style={{ color: "#006FB7" }}>
+            <h2 className="mb-2 text-3xl" style={{ color: '#006FB7' }}>
               Forgot Password?
             </h2>
             <p className="text-gray-600">
@@ -65,8 +66,13 @@ export default function ResetPasswordPage() {
           </div>
           <form
             onSubmit={handleSubmit(onSubmit)}
-            className="flex flex-col gap-4 mt-4"
+            className="mt-4 flex flex-col gap-4"
           >
+            <div
+              onInputCapture={(e) =>
+                setValue('email', (e.target as HTMLInputElement).value, { shouldValidate: true })
+              }
+            >
               <InputGroupComp
                 type="text"
                 label="Email"
@@ -74,19 +80,20 @@ export default function ResetPasswordPage() {
                 validationMessage={errors.email?.message}
                 {...register("email")}
               />
-            
+              <input type="hidden" {...register('email')} />
+            </div>
             <ButtonComp
               name="Reset Password"
               type={ButtonTypes.submit}
               btnColor="green"
-              className="w-full mt-2"
+              className="mt-2 w-full"
             />
 
-            <div className="text-center mt-2 text-sm">
-              Back to{" "}
+            <div className="mt-2 text-center text-sm">
+              Back to{' '}
               <a
                 href="/login"
-                className="text-[#006FB7] font-medium hover:underline"
+                className="font-medium text-[#006FB7] hover:underline"
               >
                 Login?
               </a>

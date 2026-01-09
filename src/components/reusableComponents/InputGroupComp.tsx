@@ -1,18 +1,18 @@
-import React from "react";
+import React from 'react';
 import {
   InputGroup,
   InputGroupButton,
   InputGroupInput,
-} from "../shadcnUI/input-group";
+} from '../shadcnUI/input-group';
 
 interface IInputProps {
   placeholder?: string;
   endContent?: React.ReactNode;
   startContent?: React.ReactNode;
-  type: "email" | "text" | "password";
+  type: 'email' | 'text' | 'password';
   onClick?: () => void;
   label?: string;
-  borderColor?: "green" | "blue";
+  borderColor?: 'green' | 'blue';
   className?: string;
   validationMessage?: string;
   wrapperClassName?: string;
@@ -33,34 +33,20 @@ const InputGroupComp = ({
 }: IInputProps) => {
   return (
     <div className={`relative ${wrapperClassName} `}>
-      {label && <label className=" text-sm text-gray-700">{label}</label>}
+      {label && <label className="text-sm text-gray-700">{label}</label>}
       <InputGroup
-        className={`mb-1 focus-visible:ring-2
-    focus-visible:ring-offset-0
-    rounded-md
-    ${
-      !validationMessage
-        ? "focus-visible:ring-[#97BE0D]/60 focus-visible:border-[#97BE0D]"
-        : "focus-visible:ring-red-500/60 focus-visible:border-red-500"
-    }`}
+        className={`mb-1 rounded-md focus-visible:ring-2 focus-visible:ring-offset-0 ${
+          !validationMessage
+            ? 'focus-visible:border-[#97BE0D] focus-visible:ring-[#97BE0D]/60'
+            : 'focus-visible:border-red-500 focus-visible:ring-red-500/60'
+        }`}
       >
         {startContent && (
           <InputGroupButton onClick={onClick}>{startContent}</InputGroupButton>
         )}
         <InputGroupInput
           type={type}
-          className={`z-20
-    focus-visible:ring-2
-    focus-visible:ring-offset-0
-    rounded-md
-    ${
-      !validationMessage
-        ? "focus-visible:ring-[#97BE0D]/60 focus-visible:border-[#97BE0D]"
-        : "focus-visible:ring-red-500/60 focus-visible:border-red-500"
-    }
-    ${className}
-    text-xs md:text-sm
-    `}
+          className={`z-20 rounded-md ${className} text-xs md:text-sm`}
           {...rest}
           placeholder={placeholder}
         />
@@ -72,7 +58,7 @@ const InputGroupComp = ({
       </InputGroup>
 
       {validationMessage && (
-        <p className="absolute text-red-600 text-xs">{validationMessage}</p>
+        <p className="absolute text-xs text-red-600">{validationMessage}</p>
       )}
     </div>
   );

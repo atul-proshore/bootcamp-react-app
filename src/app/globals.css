@@ -1,5 +1,36 @@
-@import "tailwindcss";
-@import "tw-animate-css";
+@import 'tailwindcss';
+@import 'tw-animate-css';
+
+.deheus-text-primary {
+  color: #0067f0;
+}
+
+.deheus-text-primary:hover {
+  color: #005c98;
+}
+
+.deheus-text-secondary {
+  color: #97be0d;
+}
+
+.deheus-text-secondary:hover {
+  color: #86a80e;
+}
+
+.deheus-cell-primary {
+  border-color: #65eb05;
+  background-color: #dcfce7;
+}
+
+.deheus-cell-warning {
+  border-color: #ffb701;
+  background-color: #ffedd5;
+}
+
+.deheus-cell-danger {
+  border-color: #f10000;
+  background-color: #fee2e2;
+}
 
 @custom-variant dark (&:is(.dark *));
 

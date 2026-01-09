@@ -1,11 +1,7 @@
 "use client";
-import Layout from "@/app/dashboard/layout";
 import {
   Sidebar,
   SidebarContent,
-  SidebarGroup,
-  SidebarGroupContent,
-  SidebarGroupLabel,
   SidebarHeader,
   SidebarMenu,
   SidebarMenuButton,
