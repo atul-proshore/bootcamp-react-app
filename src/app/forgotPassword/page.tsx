@@ -19,6 +19,7 @@ export default function ResetPasswordPage() {
     formState: { errors },
   } = useForm({
     resolver: yupResolver(resetPasswordSchema),
+    mode: "onSubmit",
   });
 
   interface ResetPasswordFormData {
@@ -29,7 +30,7 @@ export default function ResetPasswordPage() {
     console.log('RESET PASSWORD DATA:', data);
   };
   return (
-    <div className="flex h-screen">
+    <div className="min-h-screen flex flex-col md:flex-row">
       {/* Left side - Image */}
       <div className="relative flex h-full w-1/2 items-center justify-center">
         <Image
@@ -45,12 +46,13 @@ export default function ResetPasswordPage() {
           <h2 className="mb-4 text-lg font-medium">
             Poultry Farming Excellence
           </h2>
-          <p className="text-sm leading-relaxed">
+          <p className="hidden md:block text-sm leading-relaxed">
             Leading the industry with innovative nutrition solutions <br />
             for poultry farmers worldwide.
           </p>
         </div>
       </div>
+
       {/* Right side - Reset Password Form */}
       <div className="flex w-1/2 items-center justify-center bg-white">
         <CardComp className="w-[420px] rounded-lg p-6 shadow-lg">
@@ -76,6 +78,7 @@ export default function ResetPasswordPage() {
                 label="Email"
                 placeholder="your@email.com"
                 validationMessage={errors.email?.message}
+                {...register("email")}
               />
               <input type="hidden" {...register('email')} />
             </div>
